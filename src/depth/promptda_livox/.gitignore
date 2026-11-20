@@ -1,0 +1,3 @@
+checkpoints/*.ckpt
+__pycache__/
+*.pyc

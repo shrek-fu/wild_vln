@@ -1,0 +1,69 @@
+###########################################################
+#                                                         #
+# Copyright (c)                                           #
+#                                                         #
+# The Verifiable & Control-Theoretic Robotics (VECTR) Lab #
+# University of California, Los Angeles                   #
+#                                                         #
+# Authors: Kenny J. Chen, Ryan Nemiroff, Brett T. Lopez   #
+# Contact: {kennyjchen, ryguyn, btlopez}@ucla.edu         #
+#                                                         #
+###########################################################
+
+/**:
+  ros__parameters:
+
+    version: 1.1.1
+
+    adaptive: true
+
+    pointcloud/deskew: true
+    pointcloud/voxelize: true
+
+    imu/calibration: true
+    imu/intrinsics/accel/bias: [ 0.0, 0.0, 0.0 ]
+    imu/intrinsics/accel/sm:   [ 1.,  0.,  0.,
+                                 0.,  1.,  0.,
+                                 0.,  0.,  1. ]
+    imu/intrinsics/gyro/bias: [ 0.0, 0.0, 0.0 ]
+
+    extrinsics/baselink2imu/t: [ 0.006253, -0.011775, 0.007645 ] 
+    extrinsics/baselink2lidar/t: [ 0.,  0.,  0. ]
+    # extrinsics/baselink2imu/R: [ 1.,  0.,  0.,
+    #                              0.,  1.,  0.,
+    #                              0.,  0.,  1. ]
+    # extrinsics/baselink2lidar/R: [ 1.,  0.,  0.,
+    #                                0.,  1.,  0.,
+    #                                0.,  0.,  1. ]
+
+    # # mid360: 绕y轴逆时针旋转10度
+    # extrinsics/baselink2imu/R: [ 0.9848, 0., 0.1736,
+    #                              0.,     1., 0.,
+    #                              -0.1736, 0., 0.9848 ]  
+    # extrinsics/baselink2lidar/R: [ 0.9848, 0., 0.1736,
+    #                                0.,     1., 0.,
+    #                                -0.1736, 0., 0.9848 ]
+
+    # # mid360: 绕y轴逆时针旋转15度
+    # extrinsics/baselink2imu/R: [ 0.9659, 0., 0.2588,
+    #                            0.,     1., 0.,
+    #                           -0.2588, 0., 0.9659 ]
+    # extrinsics/baselink2lidar/R: [ 0.9659, 0., 0.2588,
+    #                            0.,     1., 0.,
+    #                           -0.2588, 0., 0.9659 ]
+
+    # mid360: 绕y轴逆时针旋转19度
+    extrinsics/baselink2imu/R: [ 0.9455, 0., 0.3256,
+                                0.,     1., 0.,
+                                -0.3256, 0., 0.9455 ]
+    extrinsics/baselink2lidar/R: [ 0.9455, 0., 0.3256,
+                                  0.,     1., 0.,
+                                  -0.3256, 0., 0.9455 ]
+
+    # # mid360: 绕y轴逆时针旋转20度
+    # extrinsics/baselink2imu/R: [ 0.9397, 0., 0.3420,
+    #                             0.,     1., 0.,
+    #                             -0.3420, 0., 0.9397 ]
+    # extrinsics/baselink2lidar/R: [ 0.9397, 0., 0.3420,
+    #                               0.,     1., 0.,
+    #                               -0.3420, 0., 0.9397 ]

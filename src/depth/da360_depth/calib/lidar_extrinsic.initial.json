@@ -1,0 +1,36 @@
+{
+  "schema": "insta360_multi_mid360s/lidar_extrinsic/v3",
+  "status": "installation",
+  "created_utc": "2026-10-22T02:59:11Z",
+  "source": "doc/mid360s_2_insta360.png, doc/install_action.jpg",
+  "lidars": {
+    "front": {
+      "id": "front_lidar",
+      "frame": "front_lidar",
+      "primary": true
+    },
+    "rear": {
+      "id": "rear_lidar",
+      "frame": "rear_lidar",
+      "primary": false
+    }
+  },
+  "convention": {
+    "equation": "p_front = T_front_rear * p_rear",
+    "level_frame": "lidar_level: origin at the front lidar, Z against gravity, yaw of the front lidar. p_level = T_level_front * p_front = T_level_rear * p_rear",
+    "rpy_deg": "[roll, pitch, yaw] in degrees, R = Rz(yaw) * Ry(pitch) * Rx(roll)",
+    "t_mm": "translation in millimeters; the matrices are in meters"
+  },
+  "installation_seed": {
+    "rpy_deg": [0.0, 0.0, 180.0],
+    "t_mm": [-247.5, 0.0, 0.0],
+    "meaning": "Rear lidar relative to the front lidar after each one is leveled with its own IMU: yaw 180 deg (mirrored heads) and the 247.5 mm baseline along -X. Roll and pitch are not part of the seed."
+  },
+  "note": "refine-auto reads this file as the seed and never overwrites it. ./calibrate.sh initial rewrites it.",
+  "T_front_rear_level_seed": [
+    [-1.0, 0.0, 0.0, -0.2475],
+    [0.0, -1.0, 0.0, 0.0],
+    [0.0, 0.0, 1.0, 0.0],
+    [0.0, 0.0, 0.0, 1.0]
+  ]
+}

@@ -1,0 +1,73 @@
+# Live Insta360 mapping with DAAAM SAM / BotSort / DAM.
+# Tuned for an 8 GB laptop: FastSAM-s, ReID off until VRAM allows, one grounding worker.
+# The 2D detector + BoT-SORT feeds Hydra labels via pipeline.launch (start_detector:=true).
+# This DAAAM node stays optional (DAM / SAM); keep start_daaam:=false for the baseline.
+
+segmentation:
+  # Paths are relative to DAAAM ROOT: checkpoints/<model_name>, config/<model_config_path>
+  model_name: "fastsam/FastSAM-s.pt"
+  model_config_path: "fastsam/fastsam_config.yaml"
+  device: "cuda"
+  min_mask_region_area: 300
+  polygon_epsilon_factor: 0.001
+  imgsz: [640, 640]
+
+tracking:
+  device: "cuda"
+  track_buffer: 30
+  enable_temporal_history: true
+  # Relative to DAAAM ROOT (BotSortAdapter joins ROOT_DIR / reid_weights)
+  reid_weights: "checkpoints/reid_weights/osnet_x0_25_msmt17.pt"
+  with_reid: false
+  reid_half: true
+
+grounding:
+  agent_model_name: "gpt-5-mini"
+  group_prompt_file: "config/prompt_templates/grounded_sam_prompt.txt"
+  query_interval_frames: 90
+  cuda_device: "0"
+  enable_perframe_clip_features: false
+  clip_feature_interval_frames: 5
+  perframe_clip_model_name: "ViT-B-16"
+  perframe_clip_model_dataset: "openai"
+
+workers:
+  num_assignment_workers: 1
+  num_grounding_workers: 1
+  assignment_worker: "min_frames"
+  grounding_worker: "dam_multi_image"
+  assignment_config:
+    min_obs_per_track: 6
+    N_masks_per_batch: 32
+    min_frame_margin_slack: 1
+    min_mask_region_area: 300
+    max_mask_region_area: 409600
+    position_score_weight: 0.5
+    size_score_weight: 0.5
+  dam_grounding_config:
+    dam_model_path: "nvidia/DAM-3B"
+    dam_conv_mode: "v1"
+    dam_prompt_mode: "focal_prompt"
+    multi_image_min_n_masks: 16
+    sentence_embedding_model_name: ""
+    compute_full_image_description: false
+    save_grounding_images: false
+    save_plain_grounding_images: false
+    save_object_images: false
+    enable_selectframe_clip_features: false
+    selectframe_clip_model_name: "ViT-B-16"
+    selectframe_clip_model_dataset: "openai"
+    selectframe_clip_backend: "openclip"
+
+depth:
+  depth_lb: 0.25
+  depth_ub: 20.0
+
+scene_graph:
+  defer_dsg_processing: true
+  enable_background_objects: true
+
+semantic_config_path: "config/labels_pseudo.yaml"
+labelspace_colors_path: "config/labels_pseudo.csv"
+hierarchical_optimization: true
+output_dir: "output/insta360_live"

@@ -1,0 +1,11 @@
+checkpoints/
+cache/
+results/
+__pycache__/
+*.pyc
+.conda/
+.venv/
+venv/
+*.exr
+*.ply
+!data/images/

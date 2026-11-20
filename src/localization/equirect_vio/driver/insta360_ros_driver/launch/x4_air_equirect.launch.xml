@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+  X4 Air → 官方 MediaSDK RealTimeStitcher 等距柱状图（与标定工程一致）
+  输出:
+    /equirectangular/image   MediaSDK template 拼接，默认 1920×960 (rgba8/bgra8)
+    /imu/data_raw
+  中间量:
+    /dual_fisheye/image/compressed   CameraSDK H.264 双鱼眼
+    /insta360/camera_preview_info    机内标定元数据（stitcher 自动读）
+-->
+<launch>
+    <arg name="stitch_config"
+         default="$(find-pkg-share insta360_ros_driver)/config/media_sdk_stitcher.yaml"/>
+
+    <node pkg="insta360_ros_driver" exec="insta360_ros_driver" name="insta360_ros_driver" output="screen"/>
+
+    <!-- Official MediaSDK stitch (NOT dual_fisheye2equirectangular DIY projection) -->
+    <node pkg="insta360_ros_driver" exec="media_sdk_stitcher" name="media_sdk_stitcher" output="screen">
+        <param from="$(var stitch_config)"/>
+    </node>
+</launch>

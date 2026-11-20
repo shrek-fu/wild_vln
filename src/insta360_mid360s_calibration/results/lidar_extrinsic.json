@@ -1,0 +1,52 @@
+{
+  "schema": "insta360_multi_mid360s/lidar_extrinsic/v3",
+  "status": "imu_level",
+  "updated_utc": "2026-11-09T03:31:01Z",
+  "method": "single lidar: roll and pitch from the MID-360S IMU gravity while the rig is still; no lidar-lidar registration",
+  "lidars": {
+    "front": {
+      "id": "front_lidar",
+      "frame": "front_lidar",
+      "primary": true
+    }
+  },
+  "convention": {
+    "equation": "p_level = T_level_front * p_front",
+    "level_frame": "lidar_level: origin at the front lidar, Z against gravity, yaw of the front lidar. p_level = T_level_front * p_front = T_level_rear * p_rear",
+    "rpy_deg": "[roll, pitch, yaw] in degrees, R = Rz(yaw) * Ry(pitch) * Rx(roll)",
+    "t_mm": "translation in millimeters; the matrices are in meters"
+  },
+  "result": {
+    "T_level_front": {
+      "rpy_deg": [0.622, 16.468, 0.09],
+      "t_mm": [0.0, 0.0, 0.0],
+      "meaning": "front lidar into lidar_level (gravity-aligned); apply uses it"
+    }
+  },
+  "leveling": {
+    "front": {
+      "imu_samples": 400,
+      "up_in_lidar": [-0.28348, 0.0104, 0.95892],
+      "z_tilt_from_up_deg": 16.479,
+      "roll_deg": 0.622,
+      "pitch_deg": 16.468,
+      "tilt_deg": 16.479
+    }
+  },
+  "quality": {
+    "scene": "static01",
+    "imu_acc_std_g": 0.07993,
+    "floor_after_leveling": {
+      "found": false,
+      "tilt_deg": 17.897,
+      "lidar_height_mm": -3.7,
+      "inliers": 3694
+    }
+  },
+  "T_level_front": [
+    [0.958977412, 0.001505661, 0.283478494, 0.0],
+    [0.001505661, 0.999944737, -0.010404573, 0.0],
+    [-0.283478494, 0.010404573, 0.958922149, 0.0],
+    [0.0, 0.0, 0.0, 1.0]
+  ]
+}

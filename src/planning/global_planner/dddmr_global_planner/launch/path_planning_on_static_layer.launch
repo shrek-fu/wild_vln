@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node pkg="global_planner" exec="pcl_publisher" output="screen" respawn="false">
+    <param from="$(find-pkg-share global_planner)/config/path_planning_on_static_layer.yaml" />
+    <!-- <param name="map_file" value="$(find-pkg-share global_planner)/data/map.pcd" />
+    <param name="ground_file" value="$(find-pkg-share global_planner)/data/ground.pcd" /> -->
+    <!-- <param name="map_file" value="/home/ubuntu/code/04-slam/robot_slam_ws/scripts/maps/0513-3_nonground.pcd" />
+    <param name="ground_file" value="/home/ubuntu/code/04-slam/robot_slam_ws/scripts/maps/0513-3_ground.pcd" /> -->
+    <param name="map_file" value="/home/ubuntu/code/04-slam/robot_slam_ws/scripts_seg/maps/0514-mjc-1_map.pcd" />
+    <param name="ground_file" value="/home/ubuntu/code/04-slam/robot_slam_ws/scripts_seg/maps/0514-mjc-1_ground.pcd" />
+  </node>
+
+  <!--name argument is not required, because it will overwrite all node name in the exec-->
+  <node pkg="global_planner" exec="global_planner_node" output="screen" respawn="false">
+    <param from="$(find-pkg-share global_planner)/config/path_planning_on_static_layer.yaml" />
+  </node>
+
+  <!--- TF -->
+  <!-- <node pkg="tf2_ros" exec="static_transform_publisher" name="map2baselink" args="0.0 0.0 -0.5 0.0 0.0 0.0 /map /base_link" /> -->
+
+  <!-- <let name="rviz_config" value="$(find-pkg-share global_planner)/rviz/path_planning_on_static_layer.rviz"/>
+  <node name="rviz2" pkg="rviz2" exec="rviz2" args="-d $(var rviz_config)"/> -->
+
+</launch>
+

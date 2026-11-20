@@ -1,0 +1,27 @@
+# Traversable ground classes for GroundingDINO + SAM2 (launch arg ground_classes:=<this file>).
+#
+#   class: prompt | prompt | ...   @terrain @blocked
+#
+# * One class per line, label order = line order; later classes paint over earlier ones,
+#   so put the specific surfaces (stairs, step, ramp) after the generic floor.
+# * Prompts are open-vocabulary text: use concrete surface / material nouns, not "walkable area".
+# * @terrain: taken from the lidar at its own height (stairs, steps, ramps are not on the ground plane);
+#   without it the class is the ground plane, extended with ray fill where the lidar has no returns.
+#   Terrain is traversable only where the robot can climb it from the floor: launch args ground_max_step
+#   (m per step, default 0.18) and ground_max_slope_deg (ramp incline / stair pitch, default 35); the rest
+#   of a terrain region (too tall a step, too steep, or a table the detector called stairs) is obstacle.
+# * @blocked: kept in /ground/class_grid but always obstacle (100) in /ground/grid, whatever the robot can
+#   climb. Also settable per run with ground_blocked_classes:=a,b.
+# * A prompt that is also an object in prompts.txt (e.g. stairs) stays an object detection and its mask
+#   is painted into this class as well.
+# * Classes compete for the same pixels: only enable what the scene has. Indoors (office bag 20261110)
+#   "road" took the grey carpet away from floor and "ramp" fired on a shopping bag.
+# Restart the detector and ground nodes after editing; both read this file at startup.
+
+floor: floor | tile floor | wooden floor | carpet
+# Outdoor / mixed scenes: uncomment as needed.
+# road: sidewalk | asphalt road
+# grass: grass | lawn
+ramp: ramp | wheelchair ramp          @terrain
+stairs: stairs | staircase            @terrain
+step: step | curb                     @terrain

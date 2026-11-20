@@ -1,0 +1,12 @@
+bag/*
+image_capture/*
+lib/*
+include/camera/*
+include/stream/*
+include/media_sdk/*
+.vscode
+*.pyc
+
+!bag/raw/.gitkeep
+!bag/compressed/.gitkeep
+!bag/undistorted/.gitkeep

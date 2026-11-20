@@ -1,0 +1,45 @@
+# livox_frame origin in base_link. base_link origin is the body center on the ground.
+# lidar_x: meters forward of the body center (negative if the lidar is behind)
+# lidar_y: meters to the left
+# lidar_height: vertical height above the ground, meters
+# pitch_deg: nose-down about base_link +Y is positive
+#
+# zsl1 lidar_x is back-calculated from the previous static TF. Replace with a
+# measured forward offset before relying on it. Other types currently share
+# that starting mount until they are measured.
+
+zsl1:
+  lidar_x: 0.1
+  lidar_y: 0.0
+  lidar_height: 0.53
+  pitch_deg: 19.0
+
+chitu:
+  lidar_x: 0.3
+  lidar_y: 0.0
+  lidar_height: 0.6
+  pitch_deg: 19.0
+
+ysc_lite3:
+  lidar_x: 0.1
+  lidar_y: 0.0
+  lidar_height: 0.58
+  pitch_deg: 19.0
+
+unitree_go2:
+  lidar_x: 0.1
+  lidar_y: 0.0
+  lidar_height: 0.6
+  pitch_deg: 19.0
+
+unitree_go2w:
+  lidar_x: 0.1
+  lidar_y: 0.0
+  lidar_height: 0.5
+  pitch_deg: 19.0
+
+unitree_b2:
+  lidar_x: 0.35
+  lidar_y: 0.0
+  lidar_height: 0.75
+  pitch_deg: 19.0

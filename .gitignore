@@ -1,0 +1,109 @@
+# --- workspace bulk (not source) ---
+/build/
+/install/
+/log/
+/models/
+/data/
+/refer/
+/insta360_driver/
+/paper/
+/jsons/
+/.vscode/
+/.venv/
+/qinav_msgs/
+
+# Nested upstream git metadata (kept locally after absorbing into this monorepo)
+**/.git_upstream/
+
+# --- build / python ---
+**/build/
+**/install/
+**/log/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.venv/
+**/venv/
+**/*.egg-info/
+**/dist/
+**/.colcon/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/compile_commands.json
+
+# --- ROS / bags / maps ---
+**/*.bag
+**/*.mcap
+**/rosbags/
+**/.ros/
+**/*.pcd
+**/*.ply
+!src/planning/local_planner/**/*.ply
+
+# --- weights / heavy binaries ---
+**/checkpoints/
+**/*.pt
+**/*.pth
+**/*.onnx
+**/*.engine
+**/*.trt
+**/*.o
+**/libCameraSDK*
+**/libMediaSDK*
+# Keep Unitree DDS shared libs; ignore static archives and other .so under src
+**/*.so
+**/*.a
+!src/planning/control/unitree_sdk2/thirdparty/**/*.so
+
+# Insta360 SDKs live at <ws>/insta360_driver/ (symlink or unpack under drivers/ is ignored)
+**/drivers/insta360_sdk/
+**/drivers/insta360_media_sdk/
+**/drivers/insta360_sdk
+**/drivers/insta360_media_sdk
+src/localization/equirect_vio/driver/Linux_CameraSDK-*/
+src/localization/equirect_vio/driver/insta360_media_sdk
+src/localization/equirect_vio/data/
+src/localization/equirect_vio/ros2_ws/build/
+src/localization/equirect_vio/ros2_ws/install/
+src/localization/equirect_vio/ros2_ws/log/
+
+# --- calibration package local junk ---
+**/insta360_mid360s_calibration/.run/
+**/insta360_mid360s_calibration/opt/
+**/insta360_mid360s_calibration/jsons/
+**/insta360_mid360s_calibration/doc/insta360/
+**/insta360_mid360s_calibration/data/
+**/insta360_mid360s_calibration/results/export/insta360_projection/
+**/insta360_mid360s_calibration/results/archive/
+**/insta360_mid360s_calibration/doc/*.jpg
+**/insta360_mid360s_calibration/doc/*.png
+
+# Large planner / third-party data blobs
+src/planning/local_planner/local_planner/paths/correspondences.txt
+src/localization/equirect_vio/third_party/**/data/
+**/Thumbs.db
+**/checkpoints
+
+# --- IDE / OS / secrets ---
+.idea/
+*.swp
+*~
+.DS_Store
+.env
+.env.*
+*.pem
+*credentials*
+*secret*
+**/id_rsa*
+**/.zhipuai_key
+
+# --- logs / temp ---
+*.log
+.tmp/
+/tmp/
+**/.run/
+
+Thumbs.db
+**/checkpoints

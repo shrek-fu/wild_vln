@@ -1,0 +1,121 @@
+{
+  "schema": "insta360_multi_mid360s/insta360_extrinsic/v1",
+  "status": "nid_calibrated",
+  "updated_utc": "2026-11-09T03:45:24Z",
+  "method": "direct_visual_lidar_calibration (NID) on the stitched equirectangular panorama; initial guess from rig geometry and a yaw search; rotation from NID, translation from config/rig.yaml geometry.camera_from_lidar_mm",
+  "translation_source": "geometry",
+  "reference": "front_lidar (primary)",
+  "convention": {
+    "equation": "p_front = T_front_X * p_X",
+    "insta360": "camera body of the stitched panorama: X forward = panorama centre, Y left, Z up",
+    "views": "optical frames of results/insta360_intrinsics.json: x right, y down, z forward",
+    "rpy_deg": "[roll, pitch, yaw] in degrees, R = Rz(yaw) * Ry(pitch) * Rx(roll)",
+    "t_mm": "translation in millimeters; the matrices are in meters"
+  },
+  "result": {
+    "T_front_insta360": {
+      "rpy_deg": [0.482, -14.086, -0.507],
+      "t_mm": [-140.72, 1.06, 81.65],
+      "meaning": "camera body in the front lidar frame"
+    },
+    "T_level_insta360": {
+      "rpy_deg": [0.935, 2.387, -0.554],
+      "t_mm": [-111.8, 0.0, 118.2],
+      "meaning": "camera body in lidar_level (gravity-aligned)"
+    },
+    "nid_translation_level_mm": [-26.85, -0.16, 120.18],
+    "initial_guess": {
+      "rpy_deg": [-0.769, -16.462, 0.611],
+      "t_mm": [-27.89, -49.41, 52.98],
+      "meaning": "T_front_insta360 before NID"
+    },
+    "refined_minus_initial": {
+      "rotation_deg": 2.779,
+      "t_mm": [-112.83, 50.47, 28.67]
+    }
+  },
+  "calibration": {
+    "run": "20261109T034146Z",
+    "scenes": [
+      "scene00",
+      "scene01",
+      "scene02",
+      "scene03",
+      "scene04"
+    ],
+    "cloud_topic": "/livox/front_lidar/points",
+    "image_topic": "/insta360/equirect/image/compressed",
+    "stitch_type": "template",
+    "overlays": "data/cam_calib/20261109T034146Z/overlay"
+  },
+  "views": {
+    "front": {
+      "frame_id": "insta360_front_optical",
+      "T_front_view": {
+        "rpy_deg": [-75.913, 0.468, -90.39],
+        "t_mm": [-140.72, 1.06, 81.65],
+        "meaning": "front view optical frame in the front lidar frame"
+      },
+      "matrix": [
+        [-0.006802993, 0.243440696, 0.969891925, -0.140720833],
+        [-0.999943502, 0.006266122, -0.008586562, 0.001061488],
+        [-0.008167779, -0.969895542, 0.243384314, 0.081651702],
+        [0.0, 0.0, 0.0, 1.0]
+      ]
+    },
+    "left": {
+      "frame_id": "insta360_left_optical",
+      "T_front_view": {
+        "rpy_deg": [-89.518, -14.086, -0.507],
+        "t_mm": [-140.72, 1.06, 81.65],
+        "meaning": "left view optical frame in the front lidar frame"
+      },
+      "matrix": [
+        [0.969891925, 0.243440696, 0.006802993, -0.140720833],
+        [-0.008586562, 0.006266122, 0.999943502, 0.001061488],
+        [0.243384314, -0.969895542, 0.008167779, 0.081651702],
+        [0.0, 0.0, 0.0, 1.0]
+      ]
+    },
+    "rear": {
+      "frame_id": "insta360_rear_optical",
+      "T_front_view": {
+        "rpy_deg": [-104.087, -0.468, 89.61],
+        "t_mm": [-140.72, 1.06, 81.65],
+        "meaning": "rear view optical frame in the front lidar frame"
+      },
+      "matrix": [
+        [0.006802993, 0.243440696, -0.969891925, -0.140720833],
+        [0.999943502, 0.006266122, 0.008586562, 0.001061488],
+        [0.008167779, -0.969895542, -0.243384314, 0.081651702],
+        [0.0, 0.0, 0.0, 1.0]
+      ]
+    },
+    "right": {
+      "frame_id": "insta360_right_optical",
+      "T_front_view": {
+        "rpy_deg": [-90.482, 14.086, 179.493],
+        "t_mm": [-140.72, 1.06, 81.65],
+        "meaning": "right view optical frame in the front lidar frame"
+      },
+      "matrix": [
+        [-0.969891925, 0.243440696, -0.006802993, -0.140720833],
+        [0.008586562, 0.006266122, -0.999943502, 0.001061488],
+        [-0.243384314, -0.969895542, -0.008167779, 0.081651702],
+        [0.0, 0.0, 0.0, 1.0]
+      ]
+    }
+  },
+  "T_front_insta360": [
+    [0.969891925, 0.006802993, -0.243440696, -0.140720833],
+    [-0.008586562, 0.999943502, -0.006266122, 0.001061488],
+    [0.243384314, 0.008167779, 0.969895542, 0.081651702],
+    [0.0, 0.0, 0.0, 1.0]
+  ],
+  "T_level_insta360": [
+    [0.999085739, 0.010344882, 0.041480964, -0.1118],
+    [-0.009658069, 0.999813503, -0.016723663, 0.0],
+    [-0.041646233, 0.016307748, 0.998999323, 0.1182],
+    [0.0, 0.0, 0.0, 1.0]
+  ]
+}

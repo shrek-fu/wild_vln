@@ -1,0 +1,118 @@
+{
+  "schema": "insta360_multi_mid360s/insta360_extrinsic/v1",
+  "status": "nid_calibrated",
+  "updated_utc": "2026-10-22T08:19:05Z",
+  "method": "direct_visual_lidar_calibration (NID) on the stitched equirectangular panorama; initial guess from rig geometry and a yaw search",
+  "reference": "front_lidar (primary)",
+  "convention": {
+    "equation": "p_front = T_front_X * p_X",
+    "insta360": "camera body of the stitched panorama: X forward = panorama centre, Y left, Z up",
+    "views": "optical frames of results/insta360_intrinsics.json: x right, y down, z forward",
+    "rpy_deg": "[roll, pitch, yaw] in degrees, R = Rz(yaw) * Ry(pitch) * Rx(roll)",
+    "t_mm": "translation in millimeters; the matrices are in meters"
+  },
+  "result": {
+    "T_front_insta360": {
+      "rpy_deg": [6.466, -31.692, -12.659],
+      "t_mm": [-205.83, -1.08, 69.2],
+      "meaning": "camera body in the front lidar frame"
+    },
+    "T_level_insta360": {
+      "rpy_deg": [-0.594, 1.049, -10.712],
+      "t_mm": [-133.69, -0.79, 171.12],
+      "meaning": "camera body in lidar_level (gravity-aligned)"
+    },
+    "initial_guess": {
+      "rpy_deg": [7.007, -32.76, -12.562],
+      "t_mm": [-191.9, -0.24, 56.9],
+      "meaning": "T_front_insta360 before NID"
+    },
+    "refined_minus_initial": {
+      "rotation_deg": 1.223,
+      "t_mm": [-13.93, -0.84, 12.3]
+    }
+  },
+  "calibration": {
+    "run": "20261022T081843Z",
+    "scenes": [
+      "scene01",
+      "scene02",
+      "scene03",
+      "scene04"
+    ],
+    "cloud_topic": "/extrinsic/lidar_fused_front",
+    "image_topic": "/insta360/equirect/image/compressed",
+    "stitch_type": "template",
+    "overlays": "data/cam_calib/20261022T081843Z/overlay"
+  },
+  "views": {
+    "front": {
+      "frame_id": "insta360_front_optical",
+      "T_front_view": {
+        "rpy_deg": [-58.144, 5.499, -99.251],
+        "t_mm": [-205.83, -1.08, 69.2],
+        "meaning": "front view optical frame in the front lidar frame"
+      },
+      "matrix": [
+        [-0.1600213, 0.534008, 0.830197952, -0.205832101],
+        [-0.982451601, -0.004516748, -0.186463002, -0.001084836],
+        [-0.09582294, -0.845467359, 0.525359791, 0.069197547],
+        [0.0, 0.0, 0.0, 1.0]
+      ]
+    },
+    "left": {
+      "frame_id": "insta360_left_optical",
+      "T_front_view": {
+        "rpy_deg": [-83.534, -31.692, -12.659],
+        "t_mm": [-205.83, -1.08, 69.2],
+        "meaning": "left view optical frame in the front lidar frame"
+      },
+      "matrix": [
+        [0.830197952, 0.534008, 0.1600213, -0.205832101],
+        [-0.186463002, -0.004516748, 0.982451601, -0.001084836],
+        [0.525359791, -0.845467359, 0.09582294, 0.069197547],
+        [0.0, 0.0, 0.0, 1.0]
+      ]
+    },
+    "rear": {
+      "frame_id": "insta360_rear_optical",
+      "T_front_view": {
+        "rpy_deg": [-121.856, -5.499, 80.749],
+        "t_mm": [-205.83, -1.08, 69.2],
+        "meaning": "rear view optical frame in the front lidar frame"
+      },
+      "matrix": [
+        [0.1600213, 0.534008, -0.830197952, -0.205832101],
+        [0.982451601, -0.004516748, 0.186463002, -0.001084836],
+        [0.09582294, -0.845467359, -0.525359791, 0.069197547],
+        [0.0, 0.0, 0.0, 1.0]
+      ]
+    },
+    "right": {
+      "frame_id": "insta360_right_optical",
+      "T_front_view": {
+        "rpy_deg": [-96.466, 31.692, 167.341],
+        "t_mm": [-205.83, -1.08, 69.2],
+        "meaning": "right view optical frame in the front lidar frame"
+      },
+      "matrix": [
+        [-0.830197952, 0.534008, -0.1600213, -0.205832101],
+        [0.186463002, -0.004516748, -0.982451601, -0.001084836],
+        [-0.525359791, -0.845467359, -0.09582294, 0.069197547],
+        [0.0, 0.0, 0.0, 1.0]
+      ]
+    }
+  },
+  "T_front_insta360": [
+    [0.830197952, 0.1600213, -0.534008, -0.205832101],
+    [-0.186463002, 0.982451601, 0.004516748, -0.001084836],
+    [0.525359791, 0.09582294, 0.845467359, 0.069197547],
+    [0.0, 0.0, 0.0, 1.0]
+  ],
+  "T_level_insta360": [
+    [0.982409354, 0.185674397, 0.01992186, -0.133689871],
+    [-0.185839815, 0.982556631, 0.00678466, -0.00078947],
+    [-0.018314619, -0.010367588, 0.999778519, 0.171121963],
+    [0.0, 0.0, 0.0, 1.0]
+  ]
+}

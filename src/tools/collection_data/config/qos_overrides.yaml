@@ -1,0 +1,36 @@
+# Gyro arrives in bursts of ~40 samples; the recorder's default depth drops ~1/3 of /imu/data_raw.
+/imu/data_raw:
+  history: keep_last
+  depth: 2000
+  reliability: reliable
+  durability: volatile
+/insta360/equirect/image/compressed:
+  history: keep_last
+  depth: 30
+  reliability: best_effort
+  durability: volatile
+/equirect_vio/odometry:
+  history: keep_last
+  depth: 200
+  reliability: reliable
+  durability: volatile
+/livox/front_lidar/imu:
+  history: keep_last
+  depth: 2000
+  reliability: reliable
+  durability: volatile
+/livox/front_lidar/custom:
+  history: keep_last
+  depth: 50
+  reliability: reliable
+  durability: volatile
+/lio/odom:
+  history: keep_last
+  depth: 200
+  reliability: reliable
+  durability: volatile
+/lio/cloud_world:
+  history: keep_last
+  depth: 50
+  reliability: reliable
+  durability: volatile

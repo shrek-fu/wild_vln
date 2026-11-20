@@ -1,0 +1,71 @@
+# Single MID-360S + Insta360 X4 Air
+# Drawing (side view): doc/insta360_mid360s.png
+#   lidar optical centre 111.8 mm forward of the camera mount and 26.2 mm below
+#   the mount surface; the lidar mounting plate slopes 15 deg, so the lidar's
+#   Z axis leans forward and its X axis (forward, cable at the back) dips 15 deg.
+# The camera itself is not in the drawing; its lens-centre height above the
+# mount is an estimate (see camera_from_lidar_mm).
+#
+# Roll and pitch of the lidar come from its own IMU (./calibrate.sh level).
+# Yaw and the camera position come from the camera-lidar calibration.
+# The dual-lidar layout is kept in config/rig_dual_mid360s.yaml; copy it over
+# this file to go back to the dual workflow.
+#
+# The IP is set only here: after swapping a lidar, change its ip and run
+# ./calibrate.sh bringup. The driver topics are remapped to /livox/<id>/points
+# and /livox/<id>/imu.
+
+rig:
+  id: mid360s-insta360-x4air-front-01
+  host_ip: 192.168.1.5
+
+lidars:
+  - id: front_lidar
+    ip: 192.168.1.112
+    primary: true
+
+insta360:
+  model: Insta360 X4 Air
+  connection: usb3
+  usb_vendor_id: "2e1a"
+  # Camera SDK is USB-only and expects the camera USB mode dialog set to Android.
+  sdk_root_env: INSTA360_SDK_ROOT
+
+geometry:
+  # Panorama centre relative to the lidar optical centre, in lidar_level
+  # (x = lidar forward after leveling, y = left, z = up along gravity), mm.
+  # x = -111.8 and z = 26.2 + lens-centre height above the mount surface come
+  # from the drawing. The camera stands on the mount pins, so that height is the
+  # X4 Air body height 113.8 mm (official spec, W x H x D 46 x 113.8 x 37) minus
+  # about 22 mm from the top of the body to the lens centre (estimate): 92 mm.
+  # y = 0 assumes the camera sits on the lidar's centre line.
+  # The search covers +-100 mm in x/y, +-90 mm in z, and the same horizontal
+  # distance in 12 headings, so a few cm of error is fine.
+  camera_from_lidar_mm: [-111.8, 0.0, 118.2]
+  # Design tilt of the lidar from the drawing; ./calibrate.sh level compares the
+  # IMU result against it.
+  lidar_tilt_deg: 15.0
+
+livox:
+  publish_freq: 10.0
+  xfer_format: 0
+  multi_topic: 1
+  pcl_data_type: 1
+  pattern_mode: 0
+
+recording:
+  seconds: 15
+  storage_id: mcap
+
+# Insta360 to front lidar calibration (./calibrate.sh cam-record / cam-calib).
+camera_lidar:
+  # Single lidar: always the raw front lidar cloud.
+  cloud: front
+  # nid: rotation and translation from NID. geometry: rotation from NID, translation
+  # from geometry.camera_from_lidar_mm. With scenes mostly 2-10 m away NID moved the
+  # camera ~85 mm forward of the drawing, and the lidar dome seen in the panorama
+  # agrees with the drawing, so geometry is used. Check overlay/*_lidar_origin.jpg.
+  translation: geometry
+  record_seconds: 5
+  solver_image: koide3/direct_visual_lidar_calibration:jazzy
+  nid_bins: 16

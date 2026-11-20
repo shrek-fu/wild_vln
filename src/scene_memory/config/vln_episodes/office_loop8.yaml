@@ -1,0 +1,20 @@
+# Offline VLN episodes for the office_loop8 scene (stvln.sh vln). expect: detector classes that count as the goal.
+# Classes in that map: table, trash can, chair, tv, door, person, robot, elevator, bottle, bed, sink, refrigerator.
+start: robot
+episodes:
+  - {id: fridge,      instruction: 去冰箱那里,             expect: [refrigerator]}
+  - {id: elevator,    instruction: 带我去电梯,             expect: [elevator]}
+  - {id: trash,       instruction: 找一个垃圾桶,           expect: [trash can]}
+  - {id: sink,        instruction: 去水槽,                 expect: [sink]}
+  - {id: tv,          instruction: 去电视那里,             expect: [tv]}
+  - {id: door,        instruction: 去门口,                 expect: [door]}
+  - {id: table,       instruction: 找一张桌子,             expect: [table]}
+  - {id: chair,       instruction: 帮我找把椅子,           expect: [chair]}
+  - {id: bottle,      instruction: 找一个瓶子,             expect: [bottle]}
+  - {id: trash_door,  instruction: 去门旁边的垃圾桶,       expect: [trash can]}
+  - {id: en_fridge,   instruction: go to the refrigerator, expect: [refrigerator]}
+  - {id: en_tv,       instruction: take me to the TV,      expect: [tv]}
+  # need the GLM agent (fast path declines: question / ordinal / time)
+  - {id: q_chair,     instruction: 离我最近的椅子在哪里？, expect: [chair]}
+  - {id: far_table,   instruction: 去最远的那张桌子,       expect: [table]}
+  - {id: seen_person, instruction: 刚才看到人的地方,       expect: [person]}

@@ -1,0 +1,23 @@
+# Insta360 X4 Air live views, started by ./calibrate.sh bringup.
+# Topics: /insta360/{front,left,rear,right}/image/compressed and camera_info,
+# plus /insta360/equirect/image/compressed.
+# front_yaw_deg turns all four views; positive turns left.
+# The seams of the two fisheye lenses are at left and right.
+insta360_views:
+  ros__parameters:
+    # The X4 Air ignores stream_resolution and the bitrate; the video sub-mode decides
+    # (liveview 3840x1920, normal 1664x832). Older builds without this parameter ignore it.
+    video_submode: "liveview"        # liveview | normal | keep
+    stream_resolution: "1920_960"
+    stream_bitrate_mbps: 4.0
+    stitch_backend: "auto"           # mediasdk when built (x86-64), else cuda (Jetson); cuda follows the template geometry
+    stitch_type: "template"          # template: fixed geometry, same model for calibration and use | optflow | dynamic | aiflow
+    equirect_width: 3840             # stitched output is width x width/2; 3840 keeps the liveview detail
+    view_size: 640                   # each view is view_size x view_size
+    view_hfov_deg: 90.0
+    front_yaw_deg: 0.0
+    publish_rate_hz: 15.0
+    jpeg_quality: 80
+    publish_equirect: true
+    software_decode: false
+    frame_prefix: "insta360"

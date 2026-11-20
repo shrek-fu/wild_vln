@@ -1,0 +1,484 @@
+{
+  "schema": "da360_insta360_rig/v1",
+  "source_dir": "/home/foo/00WS/00qiRobotics/07DepthEnhancementPack/src/DA360/calib",
+  "equirect": {
+    "width": 1920,
+    "height": 960,
+    "stitch_type": "template",
+    "model": "equirectangular",
+    "note": "intrinsic model is image size only; no radial distortion"
+  },
+  "frames": {
+    "insta360_body": "X forward=panorama centre, Y left, Z up (FlowState off)",
+    "da360_optical": "X right, Y down, Z forward (DA360 unprojection)",
+    "lidar_level": "origin at front lidar, Z against gravity, yaw of front lidar",
+    "front_lidar": "raw front MID-360S"
+  },
+  "imu": {
+    "source": "MID-360S built-in IMU gravity at lidar-lidar calibration time",
+    "leveling": {
+      "source": "MID-360S built-in IMU gravity, averaged while still; roll_deg and pitch_deg are the rpy of each leveling rotation",
+      "front": {
+        "imu_samples": 400,
+        "up_in_lidar": [
+          -0.55075,
+          -0.00225,
+          0.83466
+        ],
+        "z_tilt_from_up_deg": 33.419,
+        "roll_deg": -0.155,
+        "pitch_deg": 33.419
+      },
+      "rear": {
+        "imu_samples": 400,
+        "up_in_lidar": [
+          -0.53181,
+          0.01331,
+          0.84676
+        ],
+        "z_tilt_from_up_deg": 32.139,
+        "roll_deg": 0.9,
+        "pitch_deg": 32.128
+      }
+    },
+    "note": "camera IMU / FlowState is off; gravity alignment uses lidar IMU via T_level_*"
+  },
+  "views": {
+    "front": {
+      "frame_id": "insta360_front_optical",
+      "image_topic": "/insta360/front/image/compressed",
+      "camera_info_topic": "/insta360/front/camera_info",
+      "width": 640,
+      "height": 640,
+      "hfov_deg": 90.0,
+      "vfov_deg": 90.0,
+      "fx": 320.0,
+      "fy": 320.0,
+      "cx": 319.5,
+      "cy": 319.5,
+      "K": [
+        [
+          320.0,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.0,
+          319.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "distortion_model": "plumb_bob",
+      "D": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaw_deg": 0.0,
+      "R_body_optical": [
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ]
+    },
+    "left": {
+      "frame_id": "insta360_left_optical",
+      "image_topic": "/insta360/left/image/compressed",
+      "camera_info_topic": "/insta360/left/camera_info",
+      "width": 640,
+      "height": 640,
+      "hfov_deg": 90.0,
+      "vfov_deg": 90.0,
+      "fx": 320.0,
+      "fy": 320.0,
+      "cx": 319.5,
+      "cy": 319.5,
+      "K": [
+        [
+          320.0,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.0,
+          319.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "distortion_model": "plumb_bob",
+      "D": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaw_deg": 90.0,
+      "R_body_optical": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ]
+    },
+    "rear": {
+      "frame_id": "insta360_rear_optical",
+      "image_topic": "/insta360/rear/image/compressed",
+      "camera_info_topic": "/insta360/rear/camera_info",
+      "width": 640,
+      "height": 640,
+      "hfov_deg": 90.0,
+      "vfov_deg": 90.0,
+      "fx": 320.0,
+      "fy": 320.0,
+      "cx": 319.5,
+      "cy": 319.5,
+      "K": [
+        [
+          320.0,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.0,
+          319.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "distortion_model": "plumb_bob",
+      "D": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaw_deg": 180.0,
+      "R_body_optical": [
+        [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ]
+    },
+    "right": {
+      "frame_id": "insta360_right_optical",
+      "image_topic": "/insta360/right/image/compressed",
+      "camera_info_topic": "/insta360/right/camera_info",
+      "width": 640,
+      "height": 640,
+      "hfov_deg": 90.0,
+      "vfov_deg": 90.0,
+      "fx": 320.0,
+      "fy": 320.0,
+      "cx": 319.5,
+      "cy": 319.5,
+      "K": [
+        [
+          320.0,
+          0.0,
+          319.5
+        ],
+        [
+          0.0,
+          320.0,
+          319.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "distortion_model": "plumb_bob",
+      "D": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaw_deg": -90.0,
+      "R_body_optical": [
+        [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ]
+    }
+  },
+  "T_body_da360": [
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ],
+    [
+      -1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_front_insta360": [
+    [
+      0.830197952,
+      0.1600213,
+      -0.534008,
+      -0.205832101
+    ],
+    [
+      -0.186463002,
+      0.982451601,
+      0.004516748,
+      -0.001084836
+    ],
+    [
+      0.525359791,
+      0.09582294,
+      0.845467359,
+      0.069197547
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_level_insta360": [
+    [
+      0.982409354,
+      0.185674397,
+      0.01992186,
+      -0.133689871
+    ],
+    [
+      -0.185839815,
+      0.982556631,
+      0.00678466,
+      -0.00078947
+    ],
+    [
+      -0.018314619,
+      -0.010367588,
+      0.999778519,
+      0.171121963
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_front_da360": [
+    [
+      -0.1600213,
+      0.534008,
+      0.830197952,
+      -0.205832101
+    ],
+    [
+      -0.982451601,
+      -0.004516748,
+      -0.186463002,
+      -0.001084836
+    ],
+    [
+      -0.09582294,
+      -0.845467359,
+      0.525359791,
+      0.069197547
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_level_da360": [
+    [
+      -0.185674397,
+      -0.01992186,
+      0.982409354,
+      -0.133689871
+    ],
+    [
+      -0.982556631,
+      -0.00678466,
+      -0.185839815,
+      -0.00078947
+    ],
+    [
+      0.010367588,
+      -0.999778519,
+      -0.018314619,
+      0.171121963
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_level_front": [
+    [
+      0.834667659,
+      -0.000676907,
+      0.550753522,
+      0.0
+    ],
+    [
+      -0.000676907,
+      0.999997229,
+      0.002254907,
+      0.0
+    ],
+    [
+      -0.550753522,
+      -0.002254907,
+      0.834664887,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_level_rear": [
+    [
+      -0.857053529,
+      0.003306061,
+      -0.515216768,
+      -0.257676436
+    ],
+    [
+      -0.010346845,
+      -0.999888192,
+      0.010795665,
+      2.9787e-05
+    ],
+    [
+      -0.515123472,
+      0.014583331,
+      0.856991911,
+      0.006361427
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "T_front_rear": [
+    [
+      -0.431641793,
+      -0.004595527,
+      -0.902033394,
+      -0.218577786
+    ],
+    [
+      -0.008605114,
+      -0.999920543,
+      0.009211952,
+      0.000189866
+    ],
+    [
+      -0.902004055,
+      0.011738364,
+      0.43156795,
+      -0.136606478
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "status": {
+    "camera": "nid_calibrated",
+    "lidar": "auto_icp"
+  }
+}

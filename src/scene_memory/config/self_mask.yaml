@@ -1,0 +1,5 @@
+# Robot self-occlusion per pinhole view: polygons of [x, y] in normalised image coordinates (0..1, top left).
+# The detector paints these regions grey before inference and drops detections mostly inside them.
+# Measured on .56 (640x640 views, hfov 90): the head tip at the bottom centre of the front view.
+front:
+  - [[0.43, 0.92], [0.57, 0.92], [0.60, 1.0], [0.40, 1.0]]

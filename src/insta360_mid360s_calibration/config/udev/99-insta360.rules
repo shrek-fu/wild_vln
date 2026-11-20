@@ -1,0 +1,4 @@
+# Insta360 cameras (USB vendor 2e1a) for users in plugdev, so the SDK runs without sudo.
+#   sudo cp config/udev/99-insta360.rules /etc/udev/rules.d/
+#   sudo udevadm control --reload-rules && sudo udevadm trigger --attr-match=idVendor=2e1a
+SUBSYSTEM=="usb", ATTR{idVendor}=="2e1a", MODE="0664", GROUP="plugdev"

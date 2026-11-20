@@ -1,0 +1,57 @@
+# Super-LIO (src/localization/super_lio) on the front MID-360S of the Insta360 rig.
+# Based on QiNav_ws super_lio/config/livox_360.yaml. Output: /lio/odom (odom -> livox_frame, the MID-360
+# IMU, gravity aligned at start-up) and /lio/cloud_world (deskewed scan in odom).
+# The rig chain livox_frame -> front lidar -> camera is lio.extrinsic.lidar_imu + data/calib.
+/**:
+  ros__parameters:
+    lio.map.save_map: false
+    lio.map.if_filter: true
+    lio.map.save_map_dir: "/tmp"
+    lio.map.map_name: "super_lio_map.pcd"
+    lio.map.ds_size: 0.25
+    lio.map.save_interval: -1
+
+    # livox_ros_driver2 with xfer_format 1 (CustomMsg), remapped by scene_memory pipeline.launch.py
+    lio.ros.lidar_topic: "/livox/front_lidar/custom"
+    lio.ros.imu_topic: "/livox/front_lidar/imu"
+
+    lio.sensor.lidar_type: 1
+    # Insta360 pole and holder are within 0.3 m of the lidar
+    lio.sensor.blind: 0.5
+    lio.sensor.maxrange: 60.0
+    lio.sensor.filter_rate: 3
+    lio.sensor.enable_downsample: true
+    lio.sensor.voxel_fliter_size: 0.5
+    lio.sensor.gravity_norm: 9.7946
+    lio.sensor.imu_type: 1
+    lio.sensor.imu_na: 0.1
+    lio.sensor.imu_ng: 0.1
+    lio.sensor.imu_nba: 0.0001
+    lio.sensor.imu_nbg: 0.0001
+
+    # T_imu_lidar of the MID-360: t (m) then R (identity)
+    lio.extrinsic.lidar_imu: [-0.011, -0.02329, 0.04412,
+                              1.0, 0.0, 0.0,
+                              0.0, 1.0, 0.0,
+                              0.0, 0.0, 1.0]
+    lio.extrinsic.odom_robo: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+    lio.hash_map.hash_capacity: 2000000
+    lio.hash_map.vox_resolution: 0.5
+
+    lio.kf.kf_type: 0
+    lio.kf.kf_max_iterations: 4
+    lio.kf.kf_align_gravity: true
+    lio.kf.kf_quit_eps: 0.001
+
+    lio.output.robot: false
+    lio.output.plan_env_world: false
+    lio.output.plan_env_body: false
+    lio.output.ml_map: false
+    lio.output.planner: false
+    lio.output.map: true
+    # full deskewed scan on /lio/cloud_world (per-view lidar depth)
+    lio.output.dense: true
+    lio.output.pub_step: 1
+
+    lio.eva.timer: false

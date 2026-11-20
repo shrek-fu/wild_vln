@@ -1,0 +1,25 @@
+/**:
+  ros__parameters:
+    robot_type: zsl1
+    cmd_vel_topic: /cmd_vel
+    remote_cmd_vel_topic: /ql/nav/robot_cmd_vel
+    cmd_vel_timeout: 0.5
+    auto_stand_on_cmd_vel: false
+    hold_rate: 20.0
+    local_ip: "192.168.1.5"  #"192.168.168.99"
+    local_port: 43988
+    dog_ip: "192.168.1.50"   #"192.168.168.168"
+    dog_version: new-v2  # old=旧狗, new=新狗, new-v2=SDK 1.1.5（速度死区与 new 相同）
+    sdk_send_port: 8081  # new-v2 机器狗 UDP 端口
+    sdk_recv_port: 8080  # new-v2 本机接收端口
+    max_restart: 5
+    max_linear_x: 1.5
+    max_linear_y: 1.0
+    max_angular_z: 3.0
+    pitch_rate: 0.25
+    height_rate: 0.40
+    posture_duration: 1.5
+    posture_repeats: 2
+    turn_rate: 0.8
+    turn_duration: 2.0
+    stand_settle: 3.0

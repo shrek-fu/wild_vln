@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>insta360_views</name>
+  <version>0.1.0</version>
+  <description>Insta360 X4 Air preview stream stitched with the vendored Media SDK (x86-64) or the CUDA stitcher (Jetson) and published as an equirect plus four pinhole views.</description>
+  <maintainer email="dev@qi.local">qi</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>libjpeg</depend>
+  <depend>gstreamer1.0</depend>
+  <depend>gstreamer1.0-plugins-base</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,24 @@
+person
+door
+chair
+table
+sofa
+bed
+stairs
+elevator
+robot
+car
+bicycle
+bench
+backpack
+bottle
+cup
+potted plant
+tv
+refrigerator
+sink
+toilet
+laptop
+book
+clock
+trash can

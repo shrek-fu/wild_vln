@@ -1,0 +1,34 @@
+# qi_move_base configuration
+# All parameters live under the node name used in the launch file.
+
+p2p_move_base:
+  ros__parameters:
+    # ── FSM ────────────────────────────────────────────────────────────────
+    controller_frequency: 20.0      # Hz – FSM cycle rate
+    planner_patience: 10.0          # s  – give up planning after this long
+    oscillation_distance: 10.0      # m  – distance threshold for oscillation reset
+    oscillation_angle: 0.5          # rad – angle threshold for oscillation reset
+    oscillation_patience: -1.0  #20.0      # s  – trigger recovery if no progress
+    controller_patience: 10.0       # s  – trigger recovery if no valid control
+    no_plan_retry_num: 5            # max recovery retries before abort
+    waiting_patience: 10.0          # s  – time to wait when path blocked
+
+    # ── Velocity output ─────────────────────────────────────────────────────
+    use_twist_stamped: false
+    twist_frame_id: "base_link"
+
+    # ── Goal tolerances ──────────────────────────────────────────────────────
+    goal_reached_dis: 0.5           # m   – XY tolerance to enter heading-align phase
+    heading_align_thre: 0.2   #0.05        # rad – yaw tolerance (rad) to declare success
+    heading_align_speed: 0.6        # rad/s – in-place rotation speed during heading alignment
+
+    # ── Stall watchdog (goal occupied / path blocked by something not in the static map) ──
+    stall_progress: 0.2             # m   – goal distance must shrink (near) / robot must move (far) by this
+    stall_patience: 8.0             # s   – no progress within near_goal_accept_dis -> accept as reached
+    stall_abort_patience: 30.0      # s   – not moving farther out -> abort
+    near_goal_accept_dis: 1.5       # m
+
+global_plan_manager:
+  ros__parameters:
+    global_planner_action_name: "get_plan"
+    global_plan_query_frequency: 0.1   # Hz – how often to re-query global planner

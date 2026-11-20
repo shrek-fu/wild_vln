@@ -1,0 +1,8 @@
+# GroundingDINO distractor prompts (detector:=gdino_sam2 only).
+# Prompted together with prompts.txt; boxes whose best match is a line here are
+# dropped, so look-alikes stop being forced onto a real class. Not sent to Hydra.
+# Add one at a time and check on recorded frames: each extra prompt dilutes the
+# text features and can also swallow true detections.
+#
+# Backlit company logo / frosted glass entrance, otherwise detected as "tv".
+logo wall

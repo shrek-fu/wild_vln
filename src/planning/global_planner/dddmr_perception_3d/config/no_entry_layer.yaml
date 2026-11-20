@@ -1,0 +1,8 @@
+# Package-default no-entry zones.
+# Prefer map-specific files via launch arg no_entry_zone_yaml / {maps_dir}/{map_name}_no_entry.yaml.
+# Keep zones disabled here so a missing override cannot crash on stale absolute paths.
+no_entry_layer:
+  ros__parameters:
+    zone1:
+      pcd: ""
+      is_enabled: false

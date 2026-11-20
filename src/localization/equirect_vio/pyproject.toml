@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "x4-equirect-vio"
+version = "0.1.0"
+description = "Insta360 X4 Air equirectangular VIO helpers around OpenVIO"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.23",
+  "opencv-python>=4.5",
+  "PyYAML>=6.0",
+]
+
+[project.scripts]
+x4-equirect-vio = "x4_equirect_vio.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["python"]

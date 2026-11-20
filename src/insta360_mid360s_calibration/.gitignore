@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+build/
+install/
+log/
+# Real SDKs are at <ws>/insta360_driver/; ignore local copies if someone unpacks here.
+drivers/insta360_sdk/
+drivers/insta360_media_sdk/
+.run/
+jsons/
+doc/insta360/
+opt/
+# Capture bags/clouds live under <ws>/data/calib_capture/ (not in this package).
+data/

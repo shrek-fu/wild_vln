@@ -1,0 +1,114 @@
+{
+  "schema": "insta360_multi_mid360s/lidar_extrinsic/v3",
+  "status": "auto_icp",
+  "updated_utc": "2026-10-22T02:59:12Z",
+  "method": "IMU gravity leveling per lidar, then one static PCD per lidar with multi-stage point-to-point and point-to-plane ICP; seed yaw and translation from lidar_extrinsic.initial.json",
+  "lidars": {
+    "front": {
+      "id": "front_lidar",
+      "frame": "front_lidar",
+      "primary": true
+    },
+    "rear": {
+      "id": "rear_lidar",
+      "frame": "rear_lidar",
+      "primary": false
+    }
+  },
+  "convention": {
+    "equation": "p_front = T_front_rear * p_rear",
+    "level_frame": "lidar_level: origin at the front lidar, Z against gravity, yaw of the front lidar. p_level = T_level_front * p_front = T_level_rear * p_rear",
+    "rpy_deg": "[roll, pitch, yaw] in degrees, R = Rz(yaw) * Ry(pitch) * Rx(roll)",
+    "t_mm": "translation in millimeters; the matrices are in meters"
+  },
+  "result": {
+    "T_front_rear": {
+      "rpy_deg": [1.558, 64.423, -178.858],
+      "t_mm": [-218.58, 0.19, -136.61],
+      "meaning": "rear lidar in the front lidar frame"
+    },
+    "T_level_front": {
+      "rpy_deg": [-0.155, 33.419, -0.046],
+      "t_mm": [0.0, 0.0, 0.0],
+      "meaning": "front lidar into lidar_level (gravity-aligned); apply uses it"
+    },
+    "T_level_rear": {
+      "rpy_deg": [0.975, 31.006, -179.308],
+      "t_mm": [-257.68, 0.03, 6.36],
+      "meaning": "rear lidar into lidar_level; apply uses it"
+    },
+    "T_front_rear_level": {
+      "rpy_deg": [0.069, -1.122, -179.607],
+      "t_mm": [-257.68, 0.03, 6.36],
+      "meaning": "rear in front after both are leveled; this is what ICP refines"
+    },
+    "installation_seed": {
+      "rpy_deg": [0.0, 0.0, 180.0],
+      "t_mm": [-247.5, 0.0, 0.0],
+      "meaning": "T_front_rear_level from lidar_extrinsic.initial.json"
+    },
+    "refined_minus_seed": {
+      "rotation_deg": 1.191,
+      "rpy_deg": [-0.069, 1.122, 0.393],
+      "t_mm": [-10.23, 1.73, 1.52]
+    }
+  },
+  "leveling": {
+    "source": "MID-360S built-in IMU gravity, averaged while still; roll_deg and pitch_deg are the rpy of each leveling rotation",
+    "front": {
+      "imu_samples": 400,
+      "up_in_lidar": [-0.55075, -0.00225, 0.83466],
+      "z_tilt_from_up_deg": 33.419,
+      "roll_deg": -0.155,
+      "pitch_deg": 33.419
+    },
+    "rear": {
+      "imu_samples": 400,
+      "up_in_lidar": [-0.53181, 0.01331, 0.84676],
+      "z_tilt_from_up_deg": 32.139,
+      "roll_deg": 0.9,
+      "pitch_deg": 32.128
+    }
+  },
+  "quality": {
+    "fitness_within_0_10m": 0.328,
+    "inlier_rmse_mm": 50.1,
+    "scene": "scene11"
+  },
+  "T_front_rear": [
+    [-0.431641793, -0.004595527, -0.902033394, -0.218577786],
+    [-0.008605114, -0.999920543, 0.009211952, 0.000189866],
+    [-0.902004055, 0.011738364, 0.43156795, -0.136606478],
+    [0.0, 0.0, 0.0, 1.0]
+  ],
+  "T_level_front": [
+    [0.834667659, -0.000676907, 0.550753522, 0.0],
+    [-0.000676907, 0.999997229, 0.002254907, 0.0],
+    [-0.550753522, -0.002254907, 0.834664887, 0.0],
+    [0.0, 0.0, 0.0, 1.0]
+  ],
+  "T_level_rear": [
+    [-0.857053529, 0.003306061, -0.515216768, -0.257676436],
+    [-0.010346845, -0.999888192, 0.010795665, 2.9787e-05],
+    [-0.515123472, 0.014583331, 0.856991911, 0.006361427],
+    [0.0, 0.0, 0.0, 1.0]
+  ],
+  "T_front_rear_level": [
+    [-0.99978482, 0.006878028, 0.019570575, -0.257676436],
+    [-0.006853181, -0.999975624, 0.00133637, 2.9787e-05],
+    [0.01957929, 0.001201962, 0.999807585, 0.006361427],
+    [0.0, 0.0, 0.0, 1.0]
+  ],
+  "T_front_rear_level_seed": [
+    [-1.0, 0.0, 0.0, -0.2475],
+    [0.0, -1.0, 0.0, 0.0],
+    [0.0, 0.0, 1.0, 0.0],
+    [0.0, 0.0, 0.0, 1.0]
+  ],
+  "R_level_rear": [
+    [0.846854265, 0.003832596, 0.531811212, 0.0],
+    [0.003832596, 0.999904086, -0.013309006, 0.0],
+    [-0.531811212, 0.013309006, 0.846758351, 0.0],
+    [0.0, 0.0, 0.0, 1.0]
+  ]
+}

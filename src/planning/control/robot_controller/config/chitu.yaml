@@ -1,0 +1,9 @@
+/**:
+  ros__parameters:
+    robot_type: chitu
+    cmd_vel_topic: /cmd_vel
+    remote_cmd_vel_topic: /ql/nav/robot_cmd_vel
+    cmd_vel_timeout: 0.5
+    auto_stand_on_cmd_vel: false
+    hold_rate: 20.0
+    output_cmd_vel_topic: /rl_cmd_vel

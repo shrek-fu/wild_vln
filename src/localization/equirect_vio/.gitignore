@@ -1,0 +1,21 @@
+.venv/
+__pycache__/
+*.pyc
+build/
+data/raw/**
+data/processed/**
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/input/.gitkeep
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+third_party/openvio/build/
+# Optional huge MediaSDK archives if dropped under driver/ later
+driver/**/MediaSDK*.tar*
+driver/**/*.tar.gz
+driver/**/*.deb
+*.tum
+*.bag
+*.mcap
+.DS_Store

@@ -1,0 +1,34 @@
+# Live X4 Air. Stitch must stay template and FlowState off: data/calib was
+# calibrated on that geometry. front_yaw_deg turns all four views, positive left.
+# stitch_backend: auto = mediasdk when built (x86-64), else cuda (Jetson). The cuda
+# backend follows the same lens calibration as template (NCC >= 0.994 against it)
+# but does no seam exposure matching.
+insta360_views:
+  ros__parameters:
+    # X4 Air fw 1.2.7 ignores the requested resolution and bitrate: the camera's video sub-mode
+    # decides (liveview: 3840x1920 dual fisheye, normal: 1664x832; both ~8 Mbps, ~29.5 fps).
+    # keep = leave whatever the camera was set to.
+    video_submode: "liveview"
+    stream_resolution: "1920_960"
+    stream_bitrate_mbps: 4.0
+    stitch_backend: "auto"
+    stitch_type: "template"
+    # cuda backend only: GStreamer elements from the parser to raw RGBA/BGRA/RGBx/BGRx/I420/NV12
+    # (system memory) or NV12 in NVMM. Empty = NVMM zero-copy on Jetson, avdec + videoconvert elsewhere.
+    cuda_decoder: ""
+    # 3840 keeps all the liveview detail (10.7 px/deg). /<prefix>/equirect/image is then 22 MB a
+    # frame; lower this or raise vio_image_stride if its subscribers cannot keep up.
+    equirect_width: 3840
+    view_size: 640
+    view_hfov_deg: 90.0
+    front_yaw_deg: 0.0
+    publish_rate_hz: 30.0
+    jpeg_quality: 80
+    # JPEG of the full equirect, encoded on its own thread from the newest frame: ~15 Hz at 3840
+    # on Orin NX (one core); views and the raw topic keep the camera rate regardless.
+    publish_equirect: true
+    publish_vio_topics: true
+    # 1 = every stitched frame for VIO (~SDK rate). Views still use publish_rate_hz.
+    vio_image_stride: 1
+    software_decode: false
+    frame_prefix: "insta360"

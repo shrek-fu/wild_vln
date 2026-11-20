@@ -1,0 +1,59 @@
+# Dual MID-360S + Insta360 X4 Air
+# Drawing: doc/mid360s_2_insta360.png
+#   horizontal distance between lidar optical centers: 247.5 mm
+#   each lidar tilted 33 deg outward from vertical
+#
+# Front view: doc/install_action.jpg. The rear lidar is yawed 180 deg about Z
+# relative to the front lidar, so the two heads are mirrored.
+# The installation seed is Rz(180) and translation [-247.5, 0, 0] mm.
+# Roll and pitch of each lidar come from its own IMU.
+#
+# Lidars are named by position. The IP is set only here: after swapping a
+# lidar, change its ip and run ./calibrate.sh bringup. The driver topics are
+# remapped to /livox/<id>/points and /livox/<id>/imu.
+
+rig:
+  id: dual-mid360s-insta360-x4air-01
+  host_ip: 192.168.1.5
+
+lidars:
+  - id: front_lidar
+    ip: 192.168.1.112
+    primary: true
+  - id: rear_lidar
+    ip: 192.168.1.197
+    primary: false
+
+insta360:
+  model: Insta360 X4 Air
+  connection: usb3
+  usb_vendor_id: "2e1a"
+  # Camera SDK is USB-only and expects the camera USB mode dialog set to Android.
+  sdk_root_env: INSTA360_SDK_ROOT
+
+geometry:
+  baseline_mm: 247.5
+  outward_tilt_deg: 33.0
+  # Height of the panorama centre above the lidar-centre midpoint, along gravity.
+  # The drawing does not dimension it; 180 is read off doc/install_action.jpg
+  # and is only the starting point of the camera-lidar initial guess.
+  camera_dz_mm: 180.0
+
+livox:
+  publish_freq: 10.0
+  xfer_format: 0
+  multi_topic: 1
+  pcl_data_type: 1
+  pattern_mode: 0
+
+recording:
+  seconds: 15
+  storage_id: mcap
+
+# Insta360 to front lidar calibration (./calibrate.sh cam-record / cam-calib).
+camera_lidar:
+  # fused: front + rear lidar in the front lidar frame; front: front lidar only.
+  cloud: fused
+  record_seconds: 5
+  solver_image: koide3/direct_visual_lidar_calibration:jazzy
+  nid_bins: 16

@@ -1,0 +1,127 @@
+{
+  "schema": "insta360_multi_mid360s/insta360_intrinsics/v1",
+  "updated_utc": "2026-11-09T03:22:29Z",
+  "camera": "Insta360 X4 Air",
+  "source": "ideal pinhole views resampled from the Media SDK real-time stitched equirectangular panorama; no lens distortion remains. Derived from config/insta360_views.yaml, not measured.",
+  "convention": {
+    "body_frame": "insta360: camera body frame of the stitched panorama (FlowState off). X forward = panorama centre, Y left, Z up",
+    "optical_frame": "x right, y down, z forward (ROS optical)",
+    "pixel": "principal point in pixel-centre coordinates, (0, 0) is the centre of the top-left pixel",
+    "yaw_deg": "view direction about body Z, positive to the left; includes front_yaw_deg",
+    "R_body_optical": "p_body = R_body_optical * p_optical",
+    "extrinsic": "camera to lidar extrinsic is not calibrated yet"
+  },
+  "stream": {
+    "stream_resolution": "1920_960",
+    "stitch_type": "template",
+    "equirect_width": 1920,
+    "equirect_height": 960,
+    "front_yaw_deg": 0.0
+  },
+  "views": {
+    "front": {
+      "frame_id": "insta360_front_optical",
+      "image_topic": "/insta360/front/image/compressed",
+      "camera_info_topic": "/insta360/front/camera_info",
+      "width": 640,
+      "height": 640,
+      "hfov_deg": 90.0,
+      "vfov_deg": 90.0,
+      "fx": 320.0,
+      "fy": 320.0,
+      "cx": 319.5,
+      "cy": 319.5,
+      "K": [
+        [320.0, 0.0, 319.5],
+        [0.0, 320.0, 319.5],
+        [0.0, 0.0, 1.0]
+      ],
+      "distortion_model": "plumb_bob",
+      "D": [0.0, 0.0, 0.0, 0.0, 0.0],
+      "yaw_deg": 0.0,
+      "R_body_optical": [
+        [0.0, 0.0, 1.0],
+        [-1.0, 0.0, 0.0],
+        [0.0, -1.0, 0.0]
+      ]
+    },
+    "left": {
+      "frame_id": "insta360_left_optical",
+      "image_topic": "/insta360/left/image/compressed",
+      "camera_info_topic": "/insta360/left/camera_info",
+      "width": 640,
+      "height": 640,
+      "hfov_deg": 90.0,
+      "vfov_deg": 90.0,
+      "fx": 320.0,
+      "fy": 320.0,
+      "cx": 319.5,
+      "cy": 319.5,
+      "K": [
+        [320.0, 0.0, 319.5],
+        [0.0, 320.0, 319.5],
+        [0.0, 0.0, 1.0]
+      ],
+      "distortion_model": "plumb_bob",
+      "D": [0.0, 0.0, 0.0, 0.0, 0.0],
+      "yaw_deg": 90.0,
+      "R_body_optical": [
+        [1.0, 0.0, 0.0],
+        [0.0, 0.0, 1.0],
+        [0.0, -1.0, 0.0]
+      ]
+    },
+    "rear": {
+      "frame_id": "insta360_rear_optical",
+      "image_topic": "/insta360/rear/image/compressed",
+      "camera_info_topic": "/insta360/rear/camera_info",
+      "width": 640,
+      "height": 640,
+      "hfov_deg": 90.0,
+      "vfov_deg": 90.0,
+      "fx": 320.0,
+      "fy": 320.0,
+      "cx": 319.5,
+      "cy": 319.5,
+      "K": [
+        [320.0, 0.0, 319.5],
+        [0.0, 320.0, 319.5],
+        [0.0, 0.0, 1.0]
+      ],
+      "distortion_model": "plumb_bob",
+      "D": [0.0, 0.0, 0.0, 0.0, 0.0],
+      "yaw_deg": 180.0,
+      "R_body_optical": [
+        [0.0, 0.0, -1.0],
+        [1.0, 0.0, 0.0],
+        [0.0, -1.0, 0.0]
+      ]
+    },
+    "right": {
+      "frame_id": "insta360_right_optical",
+      "image_topic": "/insta360/right/image/compressed",
+      "camera_info_topic": "/insta360/right/camera_info",
+      "width": 640,
+      "height": 640,
+      "hfov_deg": 90.0,
+      "vfov_deg": 90.0,
+      "fx": 320.0,
+      "fy": 320.0,
+      "cx": 319.5,
+      "cy": 319.5,
+      "K": [
+        [320.0, 0.0, 319.5],
+        [0.0, 320.0, 319.5],
+        [0.0, 0.0, 1.0]
+      ],
+      "distortion_model": "plumb_bob",
+      "D": [0.0, 0.0, 0.0, 0.0, 0.0],
+      "yaw_deg": -90.0,
+      "R_body_optical": [
+        [-1.0, 0.0, 0.0],
+        [0.0, 0.0, -1.0],
+        [0.0, -1.0, 0.0]
+      ]
+    }
+  }
+}
